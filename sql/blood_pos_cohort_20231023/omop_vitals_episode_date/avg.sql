@@ -33,7 +33,7 @@ SELECT
     , COALESCE(AVG(CASE WHEN measurement_concept_id = '271650006' THEN value_as_number ELSE null END)) AS "Diastolic blood pressure"
     , COALESCE(AVG(CASE WHEN measurement_concept_id = '6797001' THEN value_as_number ELSE null END)) AS "Mean blood pressure"
     , COALESCE(AVG(CASE WHEN measurement_concept_id = '364075005' THEN value_as_number ELSE null END)) AS "Heart rate"
-    FROM stg_2
+FROM stg_2
 GROUP BY visit_occurrence_id, person_id, measurement_date
 )
 SELECT * FROM stg_3

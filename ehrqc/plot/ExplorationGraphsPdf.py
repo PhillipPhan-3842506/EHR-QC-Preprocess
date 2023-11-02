@@ -33,7 +33,7 @@ def plot(
 
     xSize = len(sourceDfs)
     for key in colNamesDict.keys():
-        log.info("Plotting:" + str(key))
+        log.info("Plotting: " + str(key))
         plotDfs = []
         fig, ax = plt.subplots()
         for i in range(xSize):
