@@ -1,4 +1,4 @@
-cell_limit = 4000000
+cell_limit = 5000000
 col_limit = 25
 col_limit_for_outlier_plot = 55
 combinations_limit_for_outlier_plot = 10

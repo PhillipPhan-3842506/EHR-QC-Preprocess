@@ -36,7 +36,7 @@ def __drawOutliers(df, columns, outputFile):
         plotdf = dataDf
     else:
         plotdf = pd.DataFrame(PCA(2).fit(dataDf).transform(dataDf), columns=['component_1', 'component_2'])
-    
+
     plotdf['outlier_scores'] = outlier_scores
 
     if plotdf is not None and len(plotdf) > 1:
@@ -141,6 +141,14 @@ def visualise(source_file, save_file, columns):
     log.info('Completed writing output file!!')
 
 
+def run(source_file, save_file, columns=[]):
+    if columns:
+        if args.action[0] == 'clean':
+            clean(source_file=source_file, save_file=save_file, columns=columns)
+        else:
+            visualise(source_file=source_file, save_file=save_file, columns=columns)
+
+
 if __name__ == '__main__':
 
     import logging
@@ -178,9 +186,6 @@ if __name__ == '__main__':
     log.info('args.action: ' + str(args.action[0]))
     log.info('args.columns: ' + str(args.columns))
 
-    if args.action[0] == 'clean':
-        clean(source_file=args.source_file[0], save_file=args.save_file[0], columns=args.columns)
-    else:
-        visualise(source_file=args.source_file[0], save_file=args.save_file[0], columns=args.columns)
+    run(source_file=args.source_file[0], save_file=args.save_file[0], columns=args.columns)
 
     log.info('Done!!')

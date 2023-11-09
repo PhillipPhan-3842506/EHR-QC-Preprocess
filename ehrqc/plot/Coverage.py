@@ -31,7 +31,7 @@ def run(source_file, chunksize, id_columns, drop, percentage, save_path):
     log.info('\n\n' + str(missing_df) + '\n')
 
     if drop:
-        log.info('''Dropping columns with above ''' + str(percentage) + ''' % missingness''')
+        log.info('''Dropping columns with over ''' + str(percentage) + ''' % missingness''')
         source_dropped_df_list = []
         for source_df in source_df_list:
             source_df.drop(missing_df[missing_df.percentage_missing > percentage].column_name, axis=1, inplace=True)
@@ -63,7 +63,7 @@ if __name__ == "__main__":
                         help='Source data file path')
     parser.add_argument('chunksize', nargs=1, type=int, default=100,
                         help='Number of chunks the input file should be fragmented into. By default: [chunksize=100]')
-    parser.add_argument('id_columns', nargs='+',
+    parser.add_argument('-i', '--id_columns', nargs='*',
                         help='List of ID columns. They are used to group the other columns to calculate missing percentage.')
     parser.add_argument('-d', '--drop', action='store_true',
                         help='Drop the columns')

@@ -151,15 +151,18 @@ def impute(dataDf, algorithm):
     return imputedDf
 
 
-def run(action='compare', source_path = 'data.csv', p=None, save_path = 'imputed.csv', algorithm = 'mean'):
+def run(action='compare', source_path = 'data.csv', p=None, save_path = 'imputed.csv', algorithm = 'mean', columns=[]):
     dataDf = pd.read_csv(source_path)
 
-    if(action=='compare'):
-        meanR2, medianR2, knnR2, mfR2, emR2, miR2 = compare(fullDf=dataDf._get_numeric_data(), p=p)
-        log.info('mean R2: ' + str(meanR2) + ', median R2: ' + str(medianR2) + ', knn R2: ' + str(knnR2) + ', mf R2: ' + str(mfR2) + ', em R2: ' + str(emR2) + ', mi R2: ' + str(miR2))
-    elif(action=='impute'):
-        imputedDf = impute(dataDf=dataDf._get_numeric_data(), algorithm=algorithm)
-        imputedDf.to_csv(save_path, index=None)
+    if columns and len(columns) > 0:
+        if(action=='compare'):
+            meanR2, medianR2, knnR2, mfR2, emR2, miR2 = compare(fullDf=dataDf[columns], p=p)
+            log.info('mean R2: ' + str(meanR2) + ', median R2: ' + str(medianR2) + ', knn R2: ' + str(knnR2) + ', mf R2: ' + str(mfR2) + ', em R2: ' + str(emR2) + ', mi R2: ' + str(miR2))
+        elif(action=='impute'):
+            imputedDf = impute(dataDf=dataDf[columns], algorithm=algorithm)
+            otherDf = dataDf[dataDf.columns[~dataDf.columns.isin(columns)]]
+            finalDf = pd.concat([otherDf, imputedDf], axis=1)
+            finalDf.to_csv(save_path, index=None)
 
 
 if __name__ == '__main__':
@@ -195,6 +198,9 @@ if __name__ == '__main__':
     parser.add_argument('-a', '--algorithm', nargs=1, default='mean',
                         help='Missing data imputation algorithm [mean, median, knn, miss_forest, expectation_maximization, multiple_imputation]')
 
+    parser.add_argument('-c', '--columns', nargs='*',
+                        help='Columns to impute')
+
     args = parser.parse_args()
 
     log.info('args.action: ' + str(args.action[0]))
@@ -202,7 +208,15 @@ if __name__ == '__main__':
     log.info('args.percentage: ' + str(args.percentage))
     log.info('args.save_path: ' + str(args.save_path[0]))
     log.info('args.algorithm: ' + str(args.algorithm[0]))
+    log.info('args.columns: ' + str(args.columns))
 
-    run(action=args.action[0], source_path = args.source_path[0], p = args.percentage, save_path = args.save_path[0], algorithm = args.algorithm[0])
+    run(
+        action=args.action[0],
+        source_path = args.source_path[0],
+        p = args.percentage,
+        save_path = args.save_path[0],
+        algorithm = args.algorithm[0],
+        columns=args.columns
+        )
 
     log.info('Done!!')
