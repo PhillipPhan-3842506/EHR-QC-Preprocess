@@ -181,7 +181,7 @@ if __name__ == '__main__':
 
     log.info("Parsing command line arguments")
 
-    parser = argparse.ArgumentParser(description='EHRQC')
+    parser = argparse.ArgumentParser(description='EHR-QC')
 
     parser.add_argument('action', nargs=1, default='compare',
                         help='Action to perform [compare, impute]')
