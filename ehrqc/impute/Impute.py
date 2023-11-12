@@ -183,11 +183,11 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='EHR-QC')
 
-    parser.add_argument('action', nargs=1, default='compare',
-                        help='Action to perform [compare, impute]')
-
     parser.add_argument('source_path', nargs=1, default='data.csv',
                         help='Source data path')
+
+    parser.add_argument('-a', '--action', nargs=1, default='compare',
+                        help='Action to perform [compare, impute]')
 
     parser.add_argument('-p', '--percentage', nargs=1,
                         help='Missing value proportion for comparison (required only for action=compare)')
