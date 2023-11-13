@@ -1,35 +1,7 @@
-        ''' "Sodium level" : ["Sodium level", "Sodium level", "Sodium level"],'''
-        +
-        ''' "Blood urea nitrogen" : ["Blood urea nitrogen", "Blood urea nitrogen", "Blood urea nitrogen"],'''
-        +
-        ''' "Creatinine level" : ["Creatinine level", "Creatinine level", "Creatinine level"],'''
-        +
-        ''' "Potassium level" : ["Potassium level", "Potassium level", "Potassium level"],'''
-        +
-        ''' "Chloride" : ["Chloride", "Chloride", "Chloride"],'''
-        +
-        ''' "Hematocrit" : ["Hematocrit", "Hematocrit", "Hematocrit"],'''
-        +
-        ''' "Haemoglobin estimation" : ["Haemoglobin estimation", "Haemoglobin estimation", "Haemoglobin estimation"],'''
-        +
-        ''' "Platelet count" : ["Platelet count", "Platelet count", "Platelet count"],'''
-        +
-        ''' "Red blood cell count" : ["Red blood cell count", "Red blood cell count", "Red blood cell count"],'''
-        +
-        ''' "Calcium level" : ["Calcium level", "Calcium level", "Calcium level"],'''
-        +
-        ''' "MCV - Mean corpuscular volume" : ["MCV - Mean corpuscular volume", "MCV - Mean corpuscular volume", "MCV - Mean corpuscular volume"],'''
-        +
-        ''' "MCHC - Mean corpuscular haemoglobin concentration" : ["MCHC - Mean corpuscular haemoglobin concentration", "MCHC - Mean corpuscular haemoglobin concentration", "MCHC - Mean corpuscular haemoglobin concentration"],'''
-        +
-        ''' "MCH - Mean corpuscular haemoglobin" : ["MCH - Mean corpuscular haemoglobin", "MCH - Mean corpuscular haemoglobin", "MCH - Mean corpuscular haemoglobin"],'''
-        +
-        ''' "White blood cell count" : ["White blood cell count", "White blood cell count", "White blood cell count"],'''
-        +
-        ''' "Red blood cell distribution width" : ["Red blood cell distribution width", "Red blood cell distribution width", "Red blood cell distribution width"],'''
-        +
-        ''' "Glucose level" : ["Glucose level", "Glucose level", "Glucose level"],'''
-        +
-        ''' "Bicarbonate level" : ["Bicarbonate level", "Bicarbonate level", "Bicarbonate level"],'''
-        +
-        ''' "Anion gap" : ["Anion gap", "Anion gap", "Anion gap"],'''
+        "Peripheral oxygen saturation" : ["Peripheral oxygen saturation", "Peripheral oxygen saturation", "Peripheral oxygen saturation"],
+        "Respiratory rate" : ["Respiratory rate", "Respiratory rate", "Respiratory rate"],
+        "Temperature" : ["Temperature", "Temperature", "Temperature"],
+        "Systolic blood pressure" : ["Systolic blood pressure", "Systolic blood pressure", "Systolic blood pressure"],
+        "Diastolic blood pressure" : ["Diastolic blood pressure", "Diastolic blood pressure", "Diastolic blood pressure"],
+        "Mean blood pressure" : ["Mean blood pressure", "Mean blood pressure", "Mean blood pressure"],
+        "Heart rate" : ["Heart rate", "Heart rate", "Heart rate"],

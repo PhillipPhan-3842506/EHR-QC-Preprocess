@@ -2,7 +2,7 @@ import os
 import pandas as pd
 
 
-def extractIcdCohort(con, schemaName, sqlFilePath):
+def extractFromSqlQuery(con, schemaName, sqlFilePath):
     curDir = os.path.dirname(__file__)
     mimicOmopSepsisIcdPath = os.path.join(curDir, sqlFilePath)
     mimicOmopSepsisIcdFile = open(mimicOmopSepsisIcdPath)
@@ -14,12 +14,13 @@ def extractIcdCohort(con, schemaName, sqlFilePath):
 
 def extract(con, sqlFilePath, savePath='data/cohort.csv', schemaName = 'mimiciv'):
     log.info('extracting data')
-    data = extractIcdCohort(con, schemaName = schemaName, sqlFilePath = sqlFilePath)
+    data = extractFromSqlQuery(con, schemaName = schemaName, sqlFilePath = sqlFilePath)
     if data is not None:
         log.info('Saving raw data to file')
         data.to_csv(savePath, index=False)
     else:
         log.error('Unable to extract data, please check the parametrs and try again!')
+    log.info("Done!")
 
 
 if __name__ == '__main__':

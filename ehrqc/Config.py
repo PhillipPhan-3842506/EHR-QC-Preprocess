@@ -10,4 +10,4 @@ db_details = {
     "sql_db_name": os.environ['POSTGRES_DB_NAME'],
 }
 
-etl_schema_name = 'eicu_etl_20231106'
+etl_schema_name = 'omop_migration_etl_20231110'

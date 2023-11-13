@@ -46,8 +46,12 @@ def run(source_file, chunksize, id_columns, drop, percentage, save_path):
     if drop:
         log.info('''Dropping columns with above ''' + str(percentage) + ''' % missingness''')
         source_dropped_df_list = []
+        i = 0
         for source_df in source_df_list:
+            i = i + 1
             source_df.drop(missing_df[missing_df.percentage_missing > percentage].column_name, axis=1, inplace=True)
+            tresh = int(source_df.shape[1]/2)
+            source_df = source_df.dropna(thresh=tresh)
             source_dropped_df_list.append(source_df)
         source_dropped_df = pd.concat(source_dropped_df_list, ignore_index=True)
         log.info('''Saving data to ''' + save_path)
@@ -61,14 +65,14 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Perform Coverage Analysis')
     parser.add_argument('source_file', nargs=1, default='data.csv',
                         help='Source data file path')
-    parser.add_argument('chunksize', nargs=1, type=int, default=100,
-                        help='Number of chunks the input file should be fragmented into. By default: [chunksize=100]')
+    parser.add_argument('chunksize', nargs=1, type=int, default=100000,
+                        help='Number of chunks the input file should be fragmented into. By default: [chunksize=100000]')
     parser.add_argument('-i', '--id_columns', nargs='+',
                         help='List of ID columns. They are used to group the other columns to calculate missing percentage.')
     parser.add_argument('-d', '--drop', action='store_true',
                         help='Drop the columns')
-    parser.add_argument('-p', '--percentage', nargs=1, type=float, default=[50],
-                        help='Specify the cutoff percentage to drop the columns (required only for drop=True). By default: [-p=50]')
+    parser.add_argument('-p', '--percentage', nargs=1, type=float, default=[100],
+                        help='Specify the cutoff percentage to drop the columns (required only for drop=True). By default: [-p=100]')
     parser.add_argument('-sp', '--save_path', nargs=1, default='./',
                         help='Path of the file to store the outputs (required only for drop=True)')
 

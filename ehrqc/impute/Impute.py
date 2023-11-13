@@ -186,7 +186,7 @@ if __name__ == '__main__':
     parser.add_argument('source_path', nargs=1, default='data.csv',
                         help='Source data path')
 
-    parser.add_argument('-a', '--action', nargs=1, default='compare',
+    parser.add_argument('-ac', '--action', nargs=1, default='compare',
                         help='Action to perform [compare, impute]')
 
     parser.add_argument('-p', '--percentage', nargs=1,
@@ -195,7 +195,7 @@ if __name__ == '__main__':
     parser.add_argument('-sp', '--save_path', nargs=1, default='imputed.csv',
                         help='Path of the file to store the outputs (required only for action=impute)')
 
-    parser.add_argument('-a', '--algorithm', nargs=1, default='mean',
+    parser.add_argument('-al', '--algorithm', nargs=1, default='mean',
                         help='Missing data imputation algorithm [mean, median, knn, miss_forest, expectation_maximization, multiple_imputation]')
 
     parser.add_argument('-c', '--columns', nargs='*',
