@@ -33,9 +33,9 @@ def run(schema_name, save_file):
         (count(distinct mmt.visit_occurrence_id)::float * 100)/(select count(distinct visit_occurrence_id) from ''' + schema_name + '''.cdm_visit_occurrence) as episode_level_coverage
         from
         ''' + schema_name + '''.cdm_measurement mmt
-        inner join ''' + schema_name + '''.concept con
-        on con.concept_code = mmt.measurement_concept_id
-        where mmt.unit_id = 'labevents'
+        inner join ''' + schema_name + '''.voc_concept con
+        on con.concept_code = mmt.measurement_concept_id::text
+        where mmt.unit_id like '%labevents%'
         group by con.concept_name, con.concept_code order by person_level_coverage desc;
     '''
     coverageDf = pd.read_sql_query(coverageQuery, con)

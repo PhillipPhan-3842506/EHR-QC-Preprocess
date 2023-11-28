@@ -33,7 +33,7 @@ def drawSummaryTable(df, tag, text, col):
             with tag('td', style='border: 1px solid black; border-collapse: collapse'):
                 text('Minimum')
             with tag('td', style='border: 1px solid black; border-collapse: collapse'):
-                text(str(round(df[col].min())))
+                text(str(round(df[col].dropna().min())))
         with tag('tr'):
             with tag('td', style='border: 1px solid black; border-collapse: collapse'):
                 text('First Quartile')

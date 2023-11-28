@@ -1,3 +1,4 @@
+import os
 import logging
 import sys
 
@@ -55,7 +56,12 @@ def run(source_file, chunksize, id_columns, drop, percentage, save_path):
             source_dropped_df_list.append(source_df)
         source_dropped_df = pd.concat(source_dropped_df_list, ignore_index=True)
         log.info('''Saving data to ''' + save_path)
-        source_dropped_df.to_csv(Path(save_path), index=None)
+
+    dirPath = Path(save_path).parent
+    if not os.path.exists(dirPath):
+        os.makedirs(dirPath)
+
+    source_dropped_df.to_csv(Path(save_path), index=None)
 
 
 if __name__ == "__main__":

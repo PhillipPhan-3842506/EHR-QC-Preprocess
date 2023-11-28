@@ -1,3 +1,4 @@
+import os
 import time
 import base64
 from matplotlib import pyplot as plt
@@ -69,6 +70,10 @@ def __drawViolinPlot(df, col, outputFile):
 
     encoded = None
     outPath = Path(Path(outputFile).parent, 'plot_' + col + '.png')
+    dirPath = Path(outputFile).parent
+    if not os.path.exists(dirPath):
+        os.makedirs(dirPath)
+
     fig.savefig(outPath, format='png', bbox_inches='tight')
     with open(outPath, "rb") as outFile:
         encoded = base64.b64encode(outFile.read()).decode('utf-8')
