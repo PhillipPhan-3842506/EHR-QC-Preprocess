@@ -17,7 +17,7 @@ from ehrqc import Settings
 def getOutlierScores(df):
     from sklearn.ensemble import IsolationForest
 
-    iforest = IsolationForest(n_estimators=100, contamination=0.2)
+    iforest = IsolationForest(n_estimators=100, contamination=Settings.outlier_contamination)
     return iforest.fit_predict(df)
 
 def __drawOutliers(df, columns, outputFile):

@@ -1,7 +1,1 @@
-        "Peripheral oxygen saturation" : ["Peripheral oxygen saturation", "Peripheral oxygen saturation", "Peripheral oxygen saturation"],
-        "Respiratory rate" : ["Respiratory rate", "Respiratory rate", "Respiratory rate"],
-        "Temperature" : ["Temperature", "Temperature", "Temperature"],
-        "Systolic blood pressure" : ["Systolic blood pressure", "Systolic blood pressure", "Systolic blood pressure"],
-        "Diastolic blood pressure" : ["Diastolic blood pressure", "Diastolic blood pressure", "Diastolic blood pressure"],
-        "Mean blood pressure" : ["Mean blood pressure", "Mean blood pressure", "Mean blood pressure"],
-        "Heart rate" : ["Heart rate", "Heart rate", "Heart rate"],
+"Sodium level_avg", "Blood urea nitrogen_avg", "Creatinine level_avg", "Potassium level_avg", "Chloride_avg", "Hematocrit_avg", "Haemoglobin estimation_avg", "Platelet count_avg", "Red blood cell count_avg", "Calcium level_avg", "MCV - Mean corpuscular volume_avg", "MCHC - Mean corpuscular haemoglobin concentration_avg", "MCH - Mean corpuscular haemoglobin_avg", "White blood cell count_avg", "Red blood cell distribution width_avg", "Glucose level_avg", "Bicarbonate level_avg", "Anion gap"
