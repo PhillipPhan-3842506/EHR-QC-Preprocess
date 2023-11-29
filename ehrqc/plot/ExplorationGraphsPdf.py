@@ -1,4 +1,4 @@
-import base64
+import os
 
 import pandas as pd
 import numpy as np
@@ -61,6 +61,9 @@ def plot(
         pdf.image(img, w=pdf.epw * 0.8)  # Make the image full width
 
     log.info("Saving the pdf")
+    dirPath = Path(outputFile).parent
+    if not os.path.exists(dirPath):
+        os.makedirs(dirPath)
     pdf.output(outputFile)
 
 
