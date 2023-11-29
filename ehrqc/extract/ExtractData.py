@@ -1,6 +1,8 @@
 import os
 import pandas as pd
 
+from pathlib import Path
+
 
 def extractFromSqlQuery(con, schemaName, sqlFilePath):
     curDir = os.path.dirname(__file__)
@@ -17,6 +19,9 @@ def extract(con, sqlFilePath, savePath='data/cohort.csv', schemaName = 'mimiciv'
     data = extractFromSqlQuery(con, schemaName = schemaName, sqlFilePath = sqlFilePath)
     if data is not None:
         log.info('Saving raw data to file')
+        dirPath = Path(savePath).parent
+        if not os.path.exists(dirPath):
+            os.makedirs(dirPath)
         data.to_csv(savePath, index=False)
     else:
         log.error('Unable to extract data, please check the parametrs and try again!')
