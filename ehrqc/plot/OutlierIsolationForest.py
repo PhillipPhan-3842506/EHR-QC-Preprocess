@@ -1,3 +1,4 @@
+import os
 import time
 import base64
 
@@ -88,6 +89,9 @@ def clean(source_file, save_file, columns):
 
     log.info('Saving the corrected file')
     if (correctedDf is not None) and (not correctedDf.empty):
+        dirPath = Path(outputFile).parent
+        if not os.path.exists(dirPath):
+            os.makedirs(dirPath)
         correctedDf.to_csv(outputFile, index=False)
 
 
@@ -136,9 +140,12 @@ def visualise(source_file, save_file, columns):
     log.info('Report generated!!')
 
     log.info('Writing output file')
+    dirPath = Path(outputFile).parent
+    if not os.path.exists(dirPath):
+        os.makedirs(dirPath)
     with open(outputFile, 'w') as output:
         output.write(doc.getvalue())
-    log.info('Completed writing output file!!')
+    log.info('Completed writing to output file!!')
 
 
 def run(source_file, save_file, columns=[]):
