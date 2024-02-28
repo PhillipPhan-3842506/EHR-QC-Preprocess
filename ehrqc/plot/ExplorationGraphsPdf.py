@@ -86,7 +86,7 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='Draw exploration graphs as pdf files')
 
-    parser.add_argument('save_path', nargs=1, default='plot.html',
+    parser.add_argument('save_path', nargs=1, default='plot.pdf',
                         help='Path of the file to store the output')
 
     parser.add_argument('-c', '--columns', type=json.loads)

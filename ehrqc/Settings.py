@@ -6,4 +6,4 @@ combinations_limit_for_outlier_plot = 10
 ensemble_score_threshold = 3
 
 # Outlier detection
-outlier_contamination=0.2
+outlier_contamination=0.01
