@@ -2,7 +2,16 @@ import os
 import pandas as pd
 
 from pathlib import Path
+import logging
+import sys
 
+log = logging.getLogger("EHR-QC")
+log.setLevel(logging.INFO)
+format = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+
+ch = logging.StreamHandler(sys.stdout)
+ch.setFormatter(format)
+log.addHandler(ch)
 
 def extractFromSqlQuery(con, schemaName, sqlFilePath):
     curDir = os.path.dirname(__file__)
@@ -30,17 +39,7 @@ def extract(con, sqlFilePath, savePath='data/cohort.csv', schemaName = 'mimiciv'
 
 if __name__ == '__main__':
 
-    import logging
-    import sys
     import argparse
-
-    log = logging.getLogger("EHR-QC")
-    log.setLevel(logging.INFO)
-    format = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
-
-    ch = logging.StreamHandler(sys.stdout)
-    ch.setFormatter(format)
-    log.addHandler(ch)
 
     log.info("Parsing command line arguments")
 
