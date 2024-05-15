@@ -24,6 +24,9 @@ import warnings
 warnings.filterwarnings("ignore")
 
 
+from hyperimpute.plugins.imputers import Imputers
+
+
 def compare(fullDf, p=None):
 
     if not p:
@@ -104,9 +107,10 @@ def compare(fullDf, p=None):
 
     try:
         log.info("Running EM imputation")
-        emImputedData = impy.em(missingDf.to_numpy())
+        plugin = Imputers().get("EM")
+        emImputedData = plugin.fit_transform(missingDf.copy())
         emImputedDataDf = pd.DataFrame(
-            emImputedData,
+            emImputedData.to_numpy(),
             columns=[(col + "_em") for col in missingDf.columns],
             index=missingDf.index,
         )
@@ -165,10 +169,13 @@ def impute(dataDf, algorithm):
             mfImputedData, columns=dataDf.columns, index=dataDf.index
         )
     if algorithm == "expectation_maximization":
-        emImputedData = impy.em(dataDf.to_numpy())
+        plugin = Imputers().get("EM")
+        emImputedData = plugin.fit_transform(dataDf.copy())
+
         imputedDf = pd.DataFrame(
-            emImputedData, columns=dataDf.columns, index=dataDf.index
+            emImputedData.to_numpy(), columns=dataDf.columns, index=dataDf.index
         )
+
     if algorithm == "multiple_imputation":
         miKernel = mf.ImputationKernel(
             dataDf, datasets=4, save_all_iterations=True, random_state=1

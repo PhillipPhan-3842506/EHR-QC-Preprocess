@@ -1,3 +1,7 @@
+import logging
+
+log = logging.getLogger("EHR-QC")
+
 import os
 import time
 import base64
@@ -8,9 +12,6 @@ from pathlib import Path
 
 from sklearn.decomposition import PCA
 
-from yattag import Doc
-
-doc, tag, text = Doc().tagtext()
 
 from ehrqc import Settings
 
@@ -151,6 +152,9 @@ def visualise(source_file, save_file, columns):
         return
     log.info("Validating complete!!")
 
+    from yattag import Doc
+
+    doc, tag, text = Doc().tagtext()
     start = time.time()
 
     log.info("Generating outlier report")
