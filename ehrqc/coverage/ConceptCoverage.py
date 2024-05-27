@@ -28,12 +28,12 @@ def getConnection():
     #     )
 
     con = psycopg2.connect(
-        dbname="ehrqc-standardise",
+        dbname="postgres",
         user="postgres",
         # host="localhost",
         host="host.docker.internal",
-        port="5555",
-        password="mysecretpassword",
+        port="5432",
+        password="mypassword",
     )
 
     return con
@@ -45,19 +45,29 @@ def run(schema_name, save_file):
 
     con = getConnection()
 
-    coverageQuery = """
+    coverageQuery = (
+        """
         select
         con.concept_name,
         con.concept_code,
-        (count(distinct mmt.person_id)::float * 100)/(select count(distinct person_id) from """ + schema_name + """.cdm_person) as person_level_coverage,
-        (count(distinct mmt.visit_occurrence_id)::float * 100)/(select count(distinct visit_occurrence_id) from """ + schema_name + """.cdm_visit_occurrence) as episode_level_coverage
+        (count(distinct mmt.person_id)::float * 100)/(select count(distinct person_id) from """
+        + schema_name
+        + """.cdm_person) as person_level_coverage,
+        (count(distinct mmt.visit_occurrence_id)::float * 100)/(select count(distinct visit_occurrence_id) from """
+        + schema_name
+        + """.cdm_visit_occurrence) as episode_level_coverage
         from
-        """ + schema_name + """.cdm_measurement mmt
-        inner join """ + schema_name + """.voc_concept con
+        """
+        + schema_name
+        + """.cdm_measurement mmt
+        inner join """
+        + schema_name
+        + """.voc_concept con
         on con.concept_code = mmt.measurement_concept_id::text
         where mmt.unit_id like '%labevents%'
         group by con.concept_name, con.concept_code order by person_level_coverage desc;
     """
+    )
     coverageDf = pd.read_sql_query(coverageQuery, con)
 
     dirPath = Path(save_file).parent
@@ -71,17 +81,21 @@ if __name__ == "__main__":
 
     log.info("Parsing command line arguments")
 
-    parser = argparse.ArgumentParser(description='Perform Coverage Analysis')
-    parser.add_argument('schema_name', nargs=1,
-                        help='Name of the OMOP DB schema')
-    parser.add_argument('-sf', '--save_file', nargs=1, default='./concept_coverage.csv',
-                        help='Path of the file to store the output')
+    parser = argparse.ArgumentParser(description="Perform Coverage Analysis")
+    parser.add_argument("schema_name", nargs=1, help="Name of the OMOP DB schema")
+    parser.add_argument(
+        "-sf",
+        "--save_file",
+        nargs=1,
+        default="./concept_coverage.csv",
+        help="Path of the file to store the output",
+    )
 
     args = parser.parse_args()
 
     log.info("Start!!")
-    log.info('args.schema_name: ' + str(args.schema_name[0]))
-    log.info('args.save_file: ' + str(args.save_file[0]))
+    log.info("args.schema_name: " + str(args.schema_name[0]))
+    log.info("args.save_file: " + str(args.save_file[0]))
 
     run(
         schema_name=args.schema_name[0],
