@@ -31,7 +31,7 @@ def getConnection():
         dbname="postgres",
         user="postgres",
         # host="localhost",
-        host="host.docker.internal",
+        host="db",
         port="5432",
         password="mypassword",
     )
